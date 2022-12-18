@@ -1,30 +1,47 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
+
 import 'game.dart';
 
-// ignore_for_file: avoid_print
 void main() {
-  var g = Game();
-  // class game enum
+  var game = Game();
   late GuessResult guessResult;
-  print('┍━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  print('│                      enter                        │');
+
+  print('╔══════════════════════════════════════════════════');
+  print('║              GUESS THE NUMBER     new               ');
+  print('║──────────────────────────────────────────────────');
+
   do {
-    stdout.write('Guess the number between 1 and 100 : ');
+    stdout.write('║  Guess the number between 1 and 100 : ');
+
     var input = stdin.readLineSync();
 
-    var guess = int.tryParse(input!);
+    if (input == null) {
+      //print('Error, input is NULL');
+      return;
+    }
+
+    var guess = int.tryParse(input);
 
     if (guess == null) {
+      //print('Input error, please enter numbers only');
       continue;
     }
-    guessResult = g.doGuess(guess);
+
+    guessResult = game.doGuess(guess);
+
     if (guessResult == GuessResult.correct) {
-      //getter ไม่มีวงเล็บ
-      print('CORRECT! The answer is ${g.answer} total guesses: ${g.TotalGuess}');
+      print('║  ➜ $guess is CORRECT ❤, total guesses: ${game.totalGuesses}');
+      print('║──────────────────────────────────────────────────');
+      print('║                    THE END                       ');
+      print('╚══════════════════════════════════════════════════');
     } else if (guessResult == GuessResult.tooHigh) {
-      print('$guess TOO HIGH');
+      print('║  ➜ $guess is TOO HIGH! ▲');
+      print('║──────────────────────────────────────────────────');
     } else {
-      print('$guess TOO LOW');
+      print('║  ➜ $guess is TOO LOW! ▼');
+      print('║──────────────────────────────────────────────────');
     }
   } while (guessResult != GuessResult.correct);
 }
