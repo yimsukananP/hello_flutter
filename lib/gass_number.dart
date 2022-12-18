@@ -9,7 +9,7 @@ void main() {
   late GuessResult guessResult;
 
   print('╔══════════════════════════════════════════════════');
-  print('║              GUESS THE NUMBER     new               ');
+  print('║              GUESS THE NUMBER     new              ');
   print('║──────────────────────────────────────────────────');
 
   do {
